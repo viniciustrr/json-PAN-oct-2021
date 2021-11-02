@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -20,10 +21,11 @@ public class Leitura {
 
 	public static void main(String[] args) throws FileNotFoundException {
         String caminhoDoArquivo = "./src/main/java/";
-        String nomeDoArquivo = "teste4.json";
+        String nomeDoArquivo = "teste5.json";
         String caminhoArquivoCompleto = caminhoDoArquivo+nomeDoArquivo;
 
         try {
+        	escreveObjJSON(caminhoArquivoCompleto);
             leMultiplosObjetosDoJSON(caminhoArquivoCompleto);
         } catch (IOException | ParseException e) {
             System.out.println(e.getMessage());
@@ -49,6 +51,37 @@ public class Leitura {
 	            System.out.println();
 	        }
 	    }
+	 
+	 
+	 private static void escreveObjJSON(String caminhoArquivo) throws FileNotFoundException {
+	        JSONObject viniciustrr = new JSONObject();
+	        viniciustrr.put("nome", "vinicius");
+	        viniciustrr.put("sobrenome", "trindade");
+	        viniciustrr.put("estado", "paraiba");
+
+	        JSONObject matheus = new JSONObject();
+	        matheus.put("nome", "matheus");
+	        matheus.put("sobrenome", "lima");
+	        matheus.put("estado", "minas gerais");
+
+
+	        JSONObject patricia = new JSONObject();
+	        patricia.put("nome", "patricia");
+	        patricia.put("sobrenome", "rocha");
+	        patricia.put("estado", "sao paulo");
+
+	        JSONArray jsonArray = new JSONArray();
+	        jsonArray.add(viniciustrr);
+	        jsonArray.add(matheus);
+	        jsonArray.add(patricia);
+	        
+	        PrintWriter arquivo = new PrintWriter(caminhoArquivo);
+	        arquivo.write(jsonArray.toJSONString());
+	        
+	        arquivo.flush();
+	        arquivo.close();
+	    }
+
 }
 
 
